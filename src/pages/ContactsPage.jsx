@@ -30,7 +30,9 @@ const ContactsPage = () => {
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
   const userData = useSelector(selectUserData);
-  const filteredContacts = useSelector(filterContact);
+  const filterContacts = useSelector(filteredContacts);
+
+  console.log(filterContacts);
 
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
@@ -102,8 +104,8 @@ const ContactsPage = () => {
               побачити!
             </p>
           )}
-          {Array.isArray(filteredContacts) &&
-            filteredContacts.map(contact => {
+          {Array.isArray(filterContacts) &&
+            filterContacts.map(contact => {
               return (
                 <div key={contact.id} className={css.postItem}>
                   <h3>{contact.name}</h3>
