@@ -37,8 +37,7 @@
 .mainWrapper.mobile {
   grid-template-columns: 1fr;
 }
-.list {
-}
+
 .details {
   position: sticky;
   top: 0;
