@@ -85,5 +85,4 @@ const userSlice = createSlice({
       }),
 });
 
-export const selectUser = state => state.auth.userData;
 export default userSlice.reducer;

@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { requestContacts, addContact, removeContact } from './thunk';
 
 const initialState = {
-  contacts: [],
+  items: [],
   isLoading: false,
   error: null,
 };
@@ -31,7 +31,7 @@ const contactsSlice = createSlice({
       })
       .addCase(addContact.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.contacts = [...state.contacts, action.payload];
+        state.items = [...state.items, action.payload];
       })
       .addCase(addContact.rejected, (state, action) => {
         state.isLoading = false;
@@ -44,7 +44,7 @@ const contactsSlice = createSlice({
       })
       .addCase(removeContact.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.contacts = state.contacts.filter(
+        state.items = state.items.filter(
           contact => contact.id !== action.payload.id
         );
       })

@@ -15,7 +15,6 @@ const Layout = ({ children }) => {
         <nav>
           {isUserAuthenticated ? (
             <>
-              {' '}
               <NavLink
                 className={({ isActive }) =>
                   cn(css.NavLink, { [css.active]: isActive })

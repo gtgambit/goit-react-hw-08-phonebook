@@ -6,14 +6,19 @@ import Loader from 'components/Loader/Loader';
 import ErrorIndicator from 'components/ErrorIndicator/ErrorIndicator';
 
 import { loginUserRequest } from 'redux/User/thunk';
+import {
+  selectError,
+  selectIsLoading,
+  selectUserData,
+} from 'redux/Contacts/selectors';
 
 function LoginPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const isLoading = useSelector(state => state.auth.isLoading);
-  const userData = useSelector(state => state.auth.userData);
-  const error = useSelector(state => state.auth.error);
+  const isLoading = useSelector(selectIsLoading);
+  const userData = useSelector(selectUserData);
+  const error = useSelector(selectError);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

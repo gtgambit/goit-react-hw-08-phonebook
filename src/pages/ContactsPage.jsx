@@ -13,29 +13,33 @@ import {
 } from '../redux/Contacts/thunk';
 
 import css from '../App.module.css';
+import {
+  filteredContacts,
+  selectContacts,
+  selectIsLoading,
+  selectError,
+  selectUserData,
+} from 'redux/Contacts/selectors';
+import { filterContact } from 'redux/Filter/filterSlice';
 
 // UI - User Interface(React)
 const ContactsPage = () => {
   const dispatch = useDispatch();
-  const filter = useSelector(state => state.filter);
 
-  const contacts = useSelector(state => state.contacts.contacts);
-  const isLoading = useSelector(state => state.contacts.isLoading);
-  const error = useSelector(state => state.contacts.error);
-  const userData = useSelector(state => state.auth.userData);
+  const contacts = useSelector(selectContacts);
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
+  const userData = useSelector(selectUserData);
+  const filteredContacts = useSelector(filterContact);
 
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
   useEffect(() => {
     if (userData == null) return;
-
     dispatch(requestContacts());
   }, [userData, dispatch]); // componentDidMount
 
-  const filteredContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().trim().includes(filter.toLowerCase().trim())
-  );
   const handleSubmit = event => {
     event.preventDefault();
 
@@ -43,11 +47,14 @@ const ContactsPage = () => {
       name,
       number,
     };
-
+    if (contacts.some(contact => contact.name === formData.name)) {
+      return alert(`${formData.name} is already in contacts.`);
+    }
     dispatch(addContact(formData));
     setName('');
     setNumber('');
   };
+
   const handleDeleteContact = contactId => {
     dispatch(removeContact(contactId));
   };

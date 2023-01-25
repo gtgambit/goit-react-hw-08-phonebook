@@ -3,6 +3,12 @@ import Loader from 'components/Loader/Loader';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import {
+  selectContacts,
+  selectError,
+  selectIsLoading,
+  selectUserData,
+} from 'redux/Contacts/selectors';
 
 import { registerUserRequest } from 'redux/User/thunk';
 
@@ -10,10 +16,10 @@ function RegisterPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const contacts = useSelector(state => state.contacts.contacts);
-  const isLoading = useSelector(state => state.auth.isLoading);
-  const userData = useSelector(state => state.auth.userData);
-  const error = useSelector(state => state.auth.error);
+  const contacts = useSelector(selectContacts);
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
+  const userData = useSelector(selectUserData);
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -78,7 +84,7 @@ function RegisterPage() {
             pattern=".{7,10}"
             required
             placeholder="min 7 cимволов"
-            autoComplete="on"
+            autoComplete="current-password"
           />
         </label>
         <button type="submit">Зареєструватися</button>
