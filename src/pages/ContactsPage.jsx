@@ -20,7 +20,6 @@ import {
   selectError,
   selectUserData,
 } from 'redux/Contacts/selectors';
-import { filterContact } from 'redux/Filter/filterSlice';
 
 // UI - User Interface(React)
 const ContactsPage = () => {
@@ -31,8 +30,6 @@ const ContactsPage = () => {
   const error = useSelector(selectError);
   const userData = useSelector(selectUserData);
   const filterContacts = useSelector(filteredContacts);
-
-  console.log(filterContacts);
 
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
