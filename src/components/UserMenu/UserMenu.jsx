@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { selectUserData } from 'redux/Contacts/selectors';
 import { logOutRequest } from 'redux/User/thunk';
 
 const UserMenu = () => {
   const dispatch = useDispatch();
-  const userData = useSelector(state => state.auth.userData);
+  const userData = useSelector(selectUserData);
 
   const handleLogOut = () => {
     dispatch(logOutRequest());
